@@ -2767,7 +2767,7 @@ config:
 # If true, it creates ClusterRole/ClusterRolebinding (with access to entire cluster)
 multiNamespaceMode: false
 
-# `podTemplate` is a templated string containing the contents of `pod_template_file.yaml` used for
+# `podTemplate` is a templated string which overwrites the content of `pod_template_file.yaml` used for
 # KubernetesExecutor workers. The default `podTemplate` will use normal `workers` configuration parameters
 # (e.g. `workers.resources`). As such, you normally won't need to override this directly, however,
 # you can still provide a completely custom `pod_template_file.yaml` if desired.
