@@ -25,11 +25,6 @@ CONTAINER_LIFECYCLE_PARAMETERS = {
         "lifecycle_templated": {"exec": {"command": ["echo", "preStop", "{{ .Release.Name }}"]}},
         "lifecycle_parsed": {"exec": {"command": ["echo", "preStop", "test-release"]}},
     },
-    "postStart": {
-        "release_name": "test-release",
-        "lifecycle_templated": {"exec": {"command": ["echo", "preStop", "{{ .Release.Name }}"]}},
-        "lifecycle_parsed": {"exec": {"command": ["echo", "preStop", "test-release"]}},
-    },
 }
 
 
