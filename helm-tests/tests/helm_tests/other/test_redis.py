@@ -377,7 +377,7 @@ class TestRedis:
         )
         assert jmespath.search("spec.template.spec.containers[0].resources", docs[0]) == {}
 
-    def test_should_set_correct_helm_hooks_weight(self):
+    def test_should_set_correct_helm_hooks(self):
         docs = render_chart(
             values={
                 "executor": "CeleryExecutor",
@@ -385,7 +385,11 @@ class TestRedis:
             show_only=["templates/secrets/redis-secrets.yaml"],
         )
         annotations = jmespath.search("metadata.annotations", docs[0])
-        assert annotations["helm.sh/hook-weight"] == "0"
+        assert annotations == {
+            "helm.sh/hook": "pre-install",
+            "helm.sh/hook-delete-policy": "before-hook-creation",
+            "helm.sh/hook-weight": "0",
+        }
 
     def test_should_add_annotations_to_redis_password_secret(self):
         docs = render_chart(
