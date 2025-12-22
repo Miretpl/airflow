@@ -151,14 +151,19 @@ class TestCreateUserJob:
         annotations = jmespath.search("metadata.annotations", docs[0])
         assert annotations is None
 
-    def test_should_set_correct_helm_hooks_weight(self):
+    def test_should_set_correct_helm_hooks(self):
         docs = render_chart(
             show_only=[
                 "templates/jobs/create-user-job.yaml",
             ],
         )
         annotations = jmespath.search("metadata.annotations", docs[0])
-        assert annotations["helm.sh/hook-weight"] == "2"
+
+        assert annotations == {
+            "helm.sh/hook": "pre-install,pre-upgrade",
+            "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded",
+            "helm.sh/hook-weight": "2",
+        }
 
     def test_should_add_extra_containers(self):
         docs = render_chart(
