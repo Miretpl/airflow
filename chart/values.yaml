@@ -709,14 +709,19 @@ workers:
   # Airflow Celery workers and pods created with pod-template-file
   containerLifecycleHooks: {}
 
-  # Worker pod disruption budget
+  # Airflow Celery workers pod disruption budget
+  # (deprecated, use `workers.celery.podDisruptionBudget` instead)
   podDisruptionBudget:
+    # (deprecated, use `workers.celery.podDisruptionBudget.enabled` instead)
     enabled: false
 
     # PDB configuration
+    # (deprecated, use `workers.celery.podDisruptionBudget.config` instead)
     config:
       # minAvailable and maxUnavailable are mutually exclusive
+      # (deprecated, use `workers.celery.podDisruptionBudget.config.maxUnavailable` instead)
       maxUnavailable: 1
+      # (deprecated, use `workers.celery.podDisruptionBudget.config.minAvailable` instead)
       # minAvailable: 1
 
   # Create ServiceAccount for Airflow Celery workers and pods created with pod-template-file
@@ -1106,6 +1111,16 @@ workers:
     securityContexts:
       pod: {}
       container: {}
+
+    # Airflow Celery workers pod disruption budget
+    podDisruptionBudget:
+      enabled: ~
+
+      # PDB configuration
+      config:
+        # minAvailable and maxUnavailable are mutually exclusive
+        maxUnavailable: ~
+        # minAvailable: ~
 
     # Persistence volume configuration for Airflow Celery workers
     persistence:
