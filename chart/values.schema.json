@@ -2467,7 +2467,7 @@
                     ]
                 },
                 "containerLifecycleHooks": {
-                    "description": "Container Lifecycle Hooks definition for Airflow Celery workers and pods created with pod-template-file. If not set, the values from global `containerLifecycleHooks` will be used. Use workers.celery.containerLifecycleHooks and/or workers.kubernetes.containerLifecycleHooks to separate value between Celery workers and pod-template-file.",
+                    "description": "Container Lifecycle Hooks definition for Airflow Celery workers and pods created with pod-template-file. If not set, the values from global `containerLifecycleHooks` will be used. Use `workers.celery.containerLifecycleHooks` and/or `workers.kubernetes.containerLifecycleHooks` to separate value between Celery workers and pod-template-file.",
                     "type": "object",
                     "$ref": "#/definitions/io.k8s.api.core.v1.Lifecycle",
                     "default": {},
