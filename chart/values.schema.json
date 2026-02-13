@@ -2279,7 +2279,7 @@
                     }
                 },
                 "resources": {
-                    "description": "Resource configuration for Airflow Celery workers and pods created with pod-template-file.",
+                    "description": "Resource configuration for Airflow Celery workers and pods created with pod-template-file (deprecated, use `workers.celery.resources` or/and `workers.kubernetes.resources` instead).",
                     "type": "object",
                     "default": {},
                     "examples": [
@@ -3025,6 +3025,24 @@
                                     }
                                 }
                             }
+                        },
+                        "resources": {
+                            "description": "Resource configuration for Airflow Celery workers.",
+                            "type": "object",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "limits": {
+                                        "cpu": "100m",
+                                        "memory": "128Mi"
+                                    },
+                                    "requests": {
+                                        "cpu": "100m",
+                                        "memory": "128Mi"
+                                    }
+                                }
+                            ],
+                            "$ref": "#/definitions/io.k8s.api.core.v1.ResourceRequirements"
                         }
                     }
                 },
@@ -3165,6 +3183,24 @@
                                     }
                                 }
                             }
+                        },
+                        "resources": {
+                            "description": "Resource configuration for pods created with pod-template-file.",
+                            "type": "object",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "limits": {
+                                        "cpu": "100m",
+                                        "memory": "128Mi"
+                                    },
+                                    "requests": {
+                                        "cpu": "100m",
+                                        "memory": "128Mi"
+                                    }
+                                }
+                            ],
+                            "$ref": "#/definitions/io.k8s.api.core.v1.ResourceRequirements"
                         }
                     }
                 }
