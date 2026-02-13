@@ -3025,6 +3025,14 @@
                                     }
                                 }
                             }
+                        },
+                        "terminationGracePeriodSeconds": {
+                            "description": "Grace period for tasks to finish after SIGTERM is sent from Kubernetes.",
+                            "type": [
+                                "integer",
+                                "null"
+                            ],
+                            "default": null
                         }
                     }
                 },
@@ -3165,6 +3173,14 @@
                                     }
                                 }
                             }
+                        },
+                        "terminationGracePeriodSeconds": {
+                            "description": "Grace period for tasks to finish after SIGTERM is sent from Kubernetes.",
+                            "type": [
+                                "integer",
+                                "null"
+                            ],
+                            "default": null
                         }
                     }
                 }
