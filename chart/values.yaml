@@ -934,6 +934,9 @@ workers:
   # Select certain nodes for Airflow Celery worker pods and pods created with pod-template-file
   nodeSelector: {}
   runtimeClassName: ~
+
+  # Use `workers.celery.priorityClassName` and/or `workers.kubernetes.priorityClassName` to separate
+  # value between Celery workers and pod-template-file
   priorityClassName: ~
   affinity: {}
   # Default Airflow Celery worker affinity is:
@@ -1158,6 +1161,8 @@ workers:
       # Container level lifecycle hooks
       containerLifecycleHooks: {}
 
+    priorityClassName: ~
+
   kubernetes:
     # Command to use in pod-template-file (templated)
     command: ~
@@ -1189,6 +1194,8 @@ workers:
 
       # Container level lifecycle hooks
       containerLifecycleHooks: {}
+
+    priorityClassName: ~
 
 # Airflow scheduler settings
 scheduler:
