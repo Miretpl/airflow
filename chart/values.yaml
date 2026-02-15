@@ -932,7 +932,10 @@ workers:
   extraPorts: []
 
   # Select certain nodes for Airflow Celery worker pods and pods created with pod-template-file
+  # Use workers.celery.nodeSelector and/or workers.kubernetes.nodeSelector to separate value
+  # between Celery workers and pod-template-file
   nodeSelector: {}
+
   runtimeClassName: ~
   priorityClassName: ~
   affinity: {}
@@ -1158,6 +1161,9 @@ workers:
       # Container level lifecycle hooks
       containerLifecycleHooks: {}
 
+    # Select certain nodes for Airflow Celery worker pods
+    nodeSelector: {}
+
   kubernetes:
     # Command to use in pod-template-file (templated)
     command: ~
@@ -1189,6 +1195,9 @@ workers:
 
       # Container level lifecycle hooks
       containerLifecycleHooks: {}
+
+    # Select certain nodes for pods created with pod-template-file
+    nodeSelector: {}
 
 # Airflow scheduler settings
 scheduler:

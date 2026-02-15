@@ -2021,6 +2021,13 @@ class TestWorkerSets:
                     "sets": [{"name": "set1", "nodeSelector": {"name": "test-node"}}],
                 },
             },
+            {
+                "celery": {
+                    "nodeSelector": {"test": "name"},
+                    "enableDefault": False,
+                    "sets": [{"name": "set1", "nodeSelector": {"name": "test-node"}}],
+                },
+            },
         ],
     )
     def test_overwrite_node_selector(self, workers_values):
