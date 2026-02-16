@@ -633,7 +633,28 @@ class TestSecurityContext:
         assert ctx_value == jmespath.search("spec.template.spec.containers[2].securityContext", docs[0])
 
     # Test securityContexts for the wait-for-migrations init containers
-    def test_wait_for_migrations_init_container_setting_airflow_2(self):
+    @pytest.mark.parametrize(
+        "workers_values",
+        [
+            {"waitForMigrations": {"securityContexts": {"container": {"allowPrivilegeEscalation": False}}}},
+            {
+                "celery": {
+                    "waitForMigrations": {
+                        "securityContexts": {"container": {"allowPrivilegeEscalation": False}}
+                    }
+                }
+            },
+            {
+                "waitForMigrations": {"securityContexts": {"container": {"runAsUser": 0}}},
+                "celery": {
+                    "waitForMigrations": {
+                        "securityContexts": {"container": {"allowPrivilegeEscalation": False}}
+                    }
+                },
+            },
+        ],
+    )
+    def test_wait_for_migrations_init_container_setting_airflow_2(self, workers_values):
         ctx_value = {"allowPrivilegeEscalation": False}
         spec = {
             "waitForMigrations": {
@@ -646,7 +667,7 @@ class TestSecurityContext:
                 "scheduler": spec,
                 "webserver": spec,
                 "triggerer": spec,
-                "workers": {"waitForMigrations": {"securityContexts": {"container": ctx_value}}},
+                "workers": workers_values,
                 "airflowVersion": "2.11.0",
             },
             show_only=[
@@ -660,7 +681,28 @@ class TestSecurityContext:
         for doc in docs:
             assert ctx_value == jmespath.search("spec.template.spec.initContainers[0].securityContext", doc)
 
-    def test_wait_for_migrations_init_container_setting(self):
+    @pytest.mark.parametrize(
+        "workers_values",
+        [
+            {"waitForMigrations": {"securityContexts": {"container": {"allowPrivilegeEscalation": False}}}},
+            {
+                "celery": {
+                    "waitForMigrations": {
+                        "securityContexts": {"container": {"allowPrivilegeEscalation": False}}
+                    }
+                }
+            },
+            {
+                "waitForMigrations": {"securityContexts": {"container": {"runAsUser": 0}}},
+                "celery": {
+                    "waitForMigrations": {
+                        "securityContexts": {"container": {"allowPrivilegeEscalation": False}}
+                    }
+                },
+            },
+        ],
+    )
+    def test_wait_for_migrations_init_container_setting(self, workers_values):
         ctx_value = {"allowPrivilegeEscalation": False}
         spec = {
             "waitForMigrations": {
@@ -674,7 +716,7 @@ class TestSecurityContext:
                 "apiServer": spec,
                 "triggerer": spec,
                 "dagProcessor": spec,
-                "workers": {"waitForMigrations": {"securityContexts": {"container": ctx_value}}},
+                "workers": workers_values,
             },
             show_only=[
                 "templates/scheduler/scheduler-deployment.yaml",
