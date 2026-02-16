@@ -1036,6 +1036,10 @@ workers:
   #         requests:
   #           storage: "20Gi"
 
+  # Use workers.celery.schedulerName and/or workers.kubernetes.schedulerName to separate value
+  # between Celery workers and pod-template-file
+  schedulerName: ~
+
   celery:
     # Number of Airflow Celery workers
     replicas: ~
@@ -1158,6 +1162,8 @@ workers:
       # Container level lifecycle hooks
       containerLifecycleHooks: {}
 
+    schedulerName: ~
+
   kubernetes:
     # Command to use in pod-template-file (templated)
     command: ~
@@ -1189,6 +1195,8 @@ workers:
 
       # Container level lifecycle hooks
       containerLifecycleHooks: {}
+
+    schedulerName: ~
 
 # Airflow scheduler settings
 scheduler:
